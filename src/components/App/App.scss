@@ -1,19 +1,16 @@
-/* Some Sass variables */
+@import './../../styles/base/colors';
+@import './../../styles/utils/grid';
+
 // Layout
 $appbar-height: 40px;
 $navbar-height: 50px;
+
 $list-width: 300px;
-$gap: 10px;
 $scrollbar-thickness: 17px;
+
 $list-header-height: 36px;
 $list-footer-height: 36px;
-// Misc
 $list-border-radius: 5px;
-$card-border-radius: 3px;
-// Colors
-$board-bg-color: #0079bf;
-$appbar-bg-color: #0067a3;
-$list-bg-color: #e2e4e6;
 
 body {
   margin: 0;
@@ -92,24 +89,5 @@ body {
 
     max-height: calc(100% - #{$list-header-height} - #{$list-footer-height});
     overflow-y: auto;
-
-    li {
-      background-color: #fff;
-      padding: $gap;
-      &:not(:last-child) {
-        margin-bottom: $gap;
-      }
-
-      border-radius: $card-border-radius;
-      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-
-      img {
-        display: block;
-        width: calc(100% + 2 * #{$gap});
-        margin: -$gap 0 $gap (-$gap);
-        border-top-left-radius: $card-border-radius;
-        border-top-right-radius: $card-border-radius;
-      }
-    }
   }
 }
