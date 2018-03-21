@@ -9,13 +9,18 @@ const getListStyle = isDraggingOver => ({
 class DroppableColumn extends Component {
   render() {
     return (
-      <Droppable droppableId="droppable">
+      <Droppable droppableId={this.props.id}>
         {(provided, snapshot) => (
-          <div
-            ref={provided.innerRef}
-            style={getListStyle(snapshot.isDraggingOver)}
-          >
-            <Column>{this.props.children}</Column>
+          <div>
+            <div
+              ref={provided.innerRef}
+              style={getListStyle(snapshot.isDraggingOver)}
+            >
+              <Column>
+                {this.props.children}
+                {provided.placeholder}
+              </Column>
+            </div>
           </div>
         )}
       </Droppable>

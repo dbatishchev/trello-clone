@@ -6,13 +6,6 @@ import Card from '../Card/Card';
 import DraggableCard from '../Card/DraggableCard/DraggableCard';
 import './App.scss';
 
-// fake data generator
-const getItems = count =>
-  Array.from({length: count}, (v, k) => k).map(k => ({
-    id: `item-${k}`,
-    content: `item ${k}`,
-  }));
-
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -22,32 +15,61 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
+const data = [
+  [
+    { id: 'a', content: 'a' },
+    { id: 'b', content: 'b' },
+    { id: 'c', content: 'c' },
+    { id: 'd', content: 'd' },
+  ],
+  [
+    { id: 'q', content: 'q' },
+    { id: 'w', content: 'w' },
+    { id: 'e', content: 'e' },
+    { id: 'r', content: 'r' },
+  ],
+];
+
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      items: getItems(10),
+      items: data,
     };
-    this.onDragEnd = this.onDragEnd.bind(this);
   }
 
-  onDragEnd(result) {
-    // dropped outside the list
+  onDragEnd = (result) => {
     if (!result.destination) {
       return;
     }
 
-    const items = reorder(
-      this.state.items,
-      result.source.index,
-      result.destination.index
-    );
+    if (result.destination.droppableId === result.source.droppableId) {
+      const columnId = Number(result.destination.droppableId);
+      data[columnId] = reorder(
+        this.state.items[columnId],
+        result.source.index,
+        result.destination.index
+      );
+    } else {
+      const sourceColumnId = Number(result.source.droppableId);
+      const destinationColumnId = Number(result.destination.droppableId);
+
+      const sourceColumn = Array.from(this.state.items[sourceColumnId]);
+      const movedElement = sourceColumn[result.source.index];
+      sourceColumn.splice(result.source.index, 1);
+
+      const destinationColumn = Array.from(this.state.items[destinationColumnId]);
+      destinationColumn.splice(result.destination.index, 0, movedElement);
+
+      data[sourceColumnId] = sourceColumn;
+      data[destinationColumnId] = destinationColumn;
+    }
 
     this.setState({
-      items,
+      items: data,
     });
-  }
+  };
 
   render() {
     return (
@@ -57,8 +79,13 @@ class App extends Component {
           <nav className="navbar board">Board bar</nav>
           <div className="lists">
             <DragDropContext onDragEnd={this.onDragEnd}>
-              <DroppableColumn>
-                {this.state.items.map((item, index) => (
+              <DroppableColumn id={'0'}>
+                {this.state.items[0].map((item, index) => (
+                  <DraggableCard item={item} index={index}>{item.content}</DraggableCard>
+                ))}
+              </DroppableColumn>
+              <DroppableColumn id={'1'}>
+                {this.state.items[1].map((item, index) => (
                   <DraggableCard item={item} index={index}>{item.content}</DraggableCard>
                 ))}
               </DroppableColumn>
