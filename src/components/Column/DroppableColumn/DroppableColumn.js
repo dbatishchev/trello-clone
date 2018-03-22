@@ -16,7 +16,7 @@ class DroppableColumn extends Component {
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
-              <Column>
+              <Column title={this.props.title}>
                 {this.props.children}
                 {provided.placeholder}
               </Column>

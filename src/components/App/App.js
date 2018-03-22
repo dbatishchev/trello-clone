@@ -1,10 +1,62 @@
 import React, {Component} from 'react';
 import {DragDropContext} from 'react-beautiful-dnd';
-import Column from '../Column/Column';
+import findIndex from 'lodash/findIndex';
 import DroppableColumn from '../Column/DroppableColumn/DroppableColumn';
-import Card from '../Card/Card';
 import DraggableCard from '../Card/DraggableCard/DraggableCard';
 import './App.scss';
+
+const db = [
+  {
+    id: 1,
+    title: 'First Column',
+    tasks: [
+      {
+        id: 1,
+        content: '111',
+      },
+      {
+        id: 2,
+        content: '222',
+      },
+      {
+        id: 3,
+        content: '333',
+      },
+    ]
+  },
+  {
+    id: 2,
+    title: 'Second Column',
+    tasks: [
+      {
+        id: 4,
+        content: '444'
+      },
+      {
+        id: 5,
+        content: '555'
+      },
+      {
+        id: 6,
+        content: '666'
+      },
+    ]
+  },
+  {
+    id: 3,
+    title: 'Third Column',
+    tasks: [
+      {
+        id: 7,
+        content: '777'
+      },
+      {
+        id: 8,
+        content: '888'
+      },
+    ]
+  },
+];
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -15,27 +67,12 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-const data = [
-  [
-    { id: 'a', content: 'a' },
-    { id: 'b', content: 'b' },
-    { id: 'c', content: 'c' },
-    { id: 'd', content: 'd' },
-  ],
-  [
-    { id: 'q', content: 'q' },
-    { id: 'w', content: 'w' },
-    { id: 'e', content: 'e' },
-    { id: 'r', content: 'r' },
-  ],
-];
-
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      items: data,
+      items: db,
     };
   }
 
@@ -46,28 +83,32 @@ class App extends Component {
 
     if (result.destination.droppableId === result.source.droppableId) {
       const columnId = Number(result.destination.droppableId);
-      data[columnId] = reorder(
-        this.state.items[columnId],
+      const columnIndex = findIndex(db, c => c.id === columnId);
+
+      db[columnIndex] = reorder(
+        this.state.items[columnIndex],
         result.source.index,
         result.destination.index
       );
     } else {
       const sourceColumnId = Number(result.source.droppableId);
       const destinationColumnId = Number(result.destination.droppableId);
+      const sourceColumnIndex = findIndex(db, c => c.id === sourceColumnId);
+      const destinationColumnIndex = findIndex(db, c => c.id === destinationColumnId);
 
-      const sourceColumn = Array.from(this.state.items[sourceColumnId]);
-      const movedElement = sourceColumn[result.source.index];
-      sourceColumn.splice(result.source.index, 1);
+      const sourceColumnTasks = Array.from(this.state.items[sourceColumnIndex].tasks);
+      const movedElement = sourceColumnTasks[result.source.index];
+      sourceColumnTasks.splice(result.source.index, 1);
 
-      const destinationColumn = Array.from(this.state.items[destinationColumnId]);
-      destinationColumn.splice(result.destination.index, 0, movedElement);
+      const destinationColumnTasks = Array.from(this.state.items[destinationColumnIndex].tasks);
+      destinationColumnTasks.splice(result.destination.index, 0, movedElement);
 
-      data[sourceColumnId] = sourceColumn;
-      data[destinationColumnId] = destinationColumn;
+      db[sourceColumnIndex].tasks = sourceColumnTasks;
+      db[destinationColumnIndex].tasks = destinationColumnTasks;
     }
 
     this.setState({
-      items: data,
+      items: db,
     });
   };
 
@@ -79,90 +120,16 @@ class App extends Component {
           <nav className="navbar board">Board bar</nav>
           <div className="lists">
             <DragDropContext onDragEnd={this.onDragEnd}>
-              <DroppableColumn id={'0'}>
-                {this.state.items[0].map((item, index) => (
-                  <DraggableCard item={item} index={index}>{item.content}</DraggableCard>
-                ))}
-              </DroppableColumn>
-              <DroppableColumn id={'1'}>
-                {this.state.items[1].map((item, index) => (
-                  <DraggableCard item={item} index={index}>{item.content}</DraggableCard>
-                ))}
-              </DroppableColumn>
+              { this.state.items.map((col) => {
+                return (
+                  <DroppableColumn id={col.id} title={col.title} key={col.id}>
+                    {col.tasks.map((item, index) => (
+                      <DraggableCard item={item} index={index} key={item.id}>{item.content}</DraggableCard>
+                    ))}
+                  </DroppableColumn>
+                );
+              })}
             </DragDropContext>
-            <Column>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet</Card>
-              <Card>
-                <img src="holder.js/300x150?auto=yes&bg=#ccc" alt=""/>
-                Lorem ipsum dolor sit amet
-              </Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet metus laoreet, ut condimentum</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet metus laoreet, ut condimentum</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-            </Column>
-            <Column>
-              <Card>Just some text</Card>
-              <Card>Just some text</Card>
-            </Column>
-            <Column>
-              <Card>
-                <img src="holder.js/600x400?auto=yes&bg=#ccc" alt=""/>
-                Lorem ipsum dolor sit amet, consectetur adipiscing eCardt
-              </Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet</Card>
-              <Card>
-                <img src="holder.js/150x150?auto=yes&bg=#ccc" alt=""/>
-                Lorem ipsum dolor sit amet
-              </Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet metus laoreet, ut condimentum</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet metus laoreet, ut condimentum</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-            </Column>
-            <Column>
-              <Card>Just some text</Card>
-              <Card>Yet another card</Card>
-            </Column>
-            <Column>
-              <Card>
-                <img src="holder.js/150x150?auto=yes&bg=#ccc" alt=""/>
-                Lorem ipsum dolor sit amet
-              </Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet</Card>
-              <Card>
-                <img src="holder.js/600x400?auto=yes&bg=#ccc" alt=""/>
-                Lorem ipsum dolor sit amet, consectetur adipiscing eCardt
-              </Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet metus laoreet, ut condimentum</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet metus laoreet, ut condimentum</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet</Card>
-              <Card>Lorem ipsum dolor sit amet</Card>
-            </Column>
-            <Column>
-              <Card>Just some text</Card>
-              <Card>Lorem ipsum dolor sit amet, consectetur adipiscing eCardt. Donec lobortis enim sit amet</Card>
-              <Card>Some more text</Card>
-              <Card>Some more text</Card>
-            </Column>
           </div>
         </div>
       </div>

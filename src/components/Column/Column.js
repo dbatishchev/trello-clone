@@ -4,7 +4,7 @@ class Column extends Component {
   render() {
     return (
       <div className="list">
-        <header>List header</header>
+        <header>{this.props.title}</header>
         <ul>
           {this.props.children}
         </ul>
