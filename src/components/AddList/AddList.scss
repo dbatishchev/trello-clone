@@ -1,0 +1,32 @@
+.add-list {
+
+  .placeholder {
+    display: none; // todo
+    display: block;
+    padding: 7px;
+    color: hsla(0, 0%, 100%, .7);
+    transition: color 85ms ease-in;
+  }
+
+  .list-name-input {
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    border-radius: 3px;
+    padding: 7px;
+    background: none;
+    border-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    cursor: pointer;
+    display: none;
+    margin: 0;
+  }
+
+  .list-add-controls {
+    height: 32px;
+    transition: margin 85ms ease-in,height 85ms ease-in;
+    overflow: hidden;
+    margin: 4px 0 0;
+  }
+
+}

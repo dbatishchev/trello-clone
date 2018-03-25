@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import CardModal from '../../components/CardModal/CardModal';
 
 class Column extends Component {
   render() {
@@ -8,7 +9,9 @@ class Column extends Component {
         <ul>
           {this.props.children}
         </ul>
-        <footer>Add a card...</footer>
+        <footer>
+          Add a card...
+        </footer>
       </div>
     );
   }

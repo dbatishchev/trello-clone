@@ -3,6 +3,8 @@ import {DragDropContext} from 'react-beautiful-dnd';
 import findIndex from 'lodash/findIndex';
 import DroppableColumn from '../Column/DroppableColumn/DroppableColumn';
 import DraggableCard from '../Card/DraggableCard/DraggableCard';
+import AddList from '../AddList/AddList';
+import 'semantic-ui-css/semantic.min.css';
 import './App.scss';
 
 const db = [
@@ -115,7 +117,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="ui">
+        <div className="app-root">
           <nav className="navbar app">App bar</nav>
           <nav className="navbar board">Board bar</nav>
           <div className="lists">
@@ -130,6 +132,7 @@ class App extends Component {
                 );
               })}
             </DragDropContext>
+            <AddList />
           </div>
         </div>
       </div>
