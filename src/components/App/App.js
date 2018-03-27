@@ -118,7 +118,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="app-root">
-          <nav className="navbar app">App bar</nav>
+          <nav className="navbar app">
+
+          </nav>
           <nav className="navbar board">Board bar</nav>
           <div className="lists">
             <DragDropContext onDragEnd={this.onDragEnd}>

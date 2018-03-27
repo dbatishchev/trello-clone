@@ -58,10 +58,9 @@ body {
   width: $list-width;
   height: calc(100% - #{$gap} - #{$scrollbar-thickness});
 
-  > * {
+  &--gray {
     background-color: $list-bg-color;
     color: #333;
-
     padding: 0 $gap;
   }
 
@@ -83,6 +82,7 @@ body {
   ul {
     list-style: none;
     margin: 0;
+    padding: 0;
 
     max-height: calc(100% - #{$list-header-height} - #{$list-footer-height});
     overflow-y: auto;
