@@ -18,3 +18,5 @@ pta-> is usefull, I have to find out if IDEA has same
 - [ ] componentDidMount of my RootComponent https://github.com/redux-saga/redux-saga/issues/661
 - [ ] https://github.com/rajaraodv/react-redux-blog/blob/master/public/src/reducers/reducer_posts.js
 - [ ] bindActionCreators
+- [ ] https://github.com/reactjs/redux/issues/1222
+- [ ] https://redux.js.org/recipes/computing-derived-data
