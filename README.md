@@ -16,3 +16,5 @@ pta-> is usefull, I have to find out if IDEA has same
 - [ ] Add creation of new ticket
 - [ ] Add ticket modal window
 - [ ] componentDidMount of my RootComponent https://github.com/redux-saga/redux-saga/issues/661
+- [ ] https://github.com/rajaraodv/react-redux-blog/blob/master/public/src/reducers/reducer_posts.js
+- [ ] bindActionCreators
