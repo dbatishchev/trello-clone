@@ -29,7 +29,7 @@ class AddList extends Component {
 
   render() {
     return (
-      <div className="list">
+      <div className="list-wrapper">
         <div className={`add-list ${this.state.opened === true ? 'add-list--opened' : 'add-list--closed'}`}>
           <form>
             <span className="placeholder" onClick={this.toggle}>Add a list…</span>
