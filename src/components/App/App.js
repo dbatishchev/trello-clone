@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import 'semantic-ui-css/semantic.min.css';
-import './App.scss';
+import BoardListButton from '../../components/BoardListButton/BoardListButton';
 import BoardPanel from '../../components/BoardPanel/BoardPanel';
 import BoardContainer from "../../containers/BoardContainer";
+import 'semantic-ui-css/semantic.min.css';
+import './App.scss';
+
 
 class App extends Component {
 
@@ -16,7 +18,7 @@ class App extends Component {
       <div className="App">
         <div className="app-root">
           <nav className="navbar app">
-            ololo
+            <BoardListButton />
             <BoardPanel />
           </nav>
           <nav className="navbar board">{this.props.activeBoard.title}</nav>
