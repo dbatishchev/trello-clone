@@ -36,7 +36,7 @@ class AddList extends Component {
     this.props.onCreate({
       id: 'ololo',
       title: this.input.value,
-      tasks: [],
+      cards: [],
     });
 
     this.input.value = '';

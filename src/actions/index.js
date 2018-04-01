@@ -13,7 +13,7 @@ export const moveCard = card => ({
   card
 });
 
-export const createList = list => ({
+export const createList = column => ({
   type: 'CREATE_LIST',
-  list
+  column
 });

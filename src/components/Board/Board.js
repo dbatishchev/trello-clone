@@ -63,10 +63,10 @@ export default class Board extends Component {
     return (
       <div className="lists">
         <DragDropContext onDragEnd={this.onDragEnd}>
-          {this.props.board.columns.map((col) => {
+          {this.props.board.columns && this.props.board.columns.map((col) => {
             return (
               <DroppableColumn id={col.id} title={col.title} key={col.id}>
-                {col.tasks.map((item, index) => (
+                {col.cards && col.cards.map((item, index) => (
                   <CardContainer card={item} index={index} key={item.id} />
                 ))}
               </DroppableColumn>

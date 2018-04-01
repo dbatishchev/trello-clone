@@ -8,11 +8,6 @@ import 'semantic-ui-css/semantic.min.css';
 import './App.scss';
 
 class App extends Component {
-
-  static propTypes = {
-    boards: PropTypes.array.isRequired,
-  };
-
   render() {
     return (
       <div className="App">
@@ -21,8 +16,8 @@ class App extends Component {
             <BoardListButton />
             <BoardPanel />
           </nav>
-          <nav className="navbar board">{this.props.activeBoard.title}</nav>
-          <BoardContainer />
+          <nav className="navbar board">{this.props.selectedBoard.title}</nav>
+          <BoardContainer board={this.props.selectedBoard} />
           <CardModalContainer />
         </div>
       </div>

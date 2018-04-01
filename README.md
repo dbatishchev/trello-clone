@@ -11,8 +11,8 @@ https://engineering.opsgenie.com/how-to-organize-react-files-before-its-messed-u
 https://code.visualstudio.com/docs/languages/javascript#_type-checking-and-quick-fixes-for-javascript-files
 pta-> is usefull, I have to find out if IDEA has same
 - [ ] Change URL's to absolute values
-- [ ] Here it is - https://github.com/atlassian/react-beautiful-dnd/blob/master/stories/3-board-story.js
-- [ ] Add creation of new column
+- [x] Here it is - https://github.com/atlassian/react-beautiful-dnd/blob/master/stories/3-board-story.js
+- [x] Add creation of new column
 - [ ] Add creation of new ticket
 - [ ] Add ticket modal window
 - [ ] componentDidMount of my RootComponent https://github.com/redux-saga/redux-saga/issues/661
@@ -21,3 +21,4 @@ pta-> is usefull, I have to find out if IDEA has same
 - [ ] https://github.com/reactjs/redux/issues/1222
 - [ ] https://redux.js.org/recipes/computing-derived-data
 - [ ] DraggableCard as HOC
+- [ ] Add dashboard toggling

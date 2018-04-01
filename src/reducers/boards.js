@@ -1,4 +1,6 @@
 const boards = (state = [], action) => {
+  // https://hackernoon.com/redux-patterns-add-edit-remove-objects-in-an-array-6ee70cab2456
+
   switch (action.type) {
     // case 'ADD_BOARD':
     //   return [
@@ -21,12 +23,22 @@ const boards = (state = [], action) => {
         isCardModalOpened: false,
       };
     case 'CREATE_LIST':
+      const columnId = action.column.id;
+      const selectedBoardDetails = state.boardsDetailsById[state.selectedBoardId];
+      selectedBoardDetails.columns = [
+        ...selectedBoardDetails.columns,
+        columnId,
+      ];
       return {
         ...state,
-        activeBoard: {
-          ...state.activeBoard,
-          columns: [...state.activeBoard.columns, action.list]
-        }
+        boardsDetailsById: {
+          ...state.boardsDetailsById,
+          [state.selectedBoardId]: selectedBoardDetails,
+        },
+        columnsById: {
+          ...state.columnsById,
+          [columnId]: action.column,
+        },
       };
     default:
       return state
