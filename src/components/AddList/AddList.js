@@ -27,6 +27,15 @@ class AddList extends Component {
     });
   };
 
+  onSaveClick = (e) => {
+    e.preventDefault();
+    this.props.onCreate({
+      id: 'ololo',
+      title: 'Created',
+      tasks: [],
+    });
+  };
+
   render() {
     return (
       <div className="list-wrapper">
@@ -44,7 +53,7 @@ class AddList extends Component {
               ref={this.setInputRef}
             />
             <div className="list-add-controls u-clearfix">
-              <Button primary>Save</Button>
+              <Button primary onClick={this.onSaveClick}>Save</Button>
               <Icon name='times' onClick={this.toggle} />
             </div>
           </form>

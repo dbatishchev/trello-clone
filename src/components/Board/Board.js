@@ -4,9 +4,9 @@ import {DragDropContext} from 'react-beautiful-dnd';
 import findIndex from 'lodash/findIndex';
 import DroppableColumn from '../Column/DroppableColumn/DroppableColumn';
 import DraggableCard from '../Card/DraggableCard/DraggableCard';
-import AddList from '../AddList/AddList';
 import './Board.scss';
 import CardContainer from "../../containers/CardContainer";
+import AddListContainer from "../../containers/AddListContainer";
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -73,7 +73,7 @@ export default class Board extends Component {
             );
           })}
         </DragDropContext>
-        <AddList/>
+        <AddListContainer/>
       </div>
     );
   }

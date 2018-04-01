@@ -20,6 +20,14 @@ const boards = (state = [], action) => {
         ...state,
         isCardModalOpened: false,
       };
+    case 'CREATE_LIST':
+      return {
+        ...state,
+        activeBoard: {
+          ...state.activeBoard,
+          columns: [...state.activeBoard.columns, action.list]
+        }
+      };
     default:
       return state
   }

@@ -12,3 +12,8 @@ export const moveCard = card => ({
   type: 'MOVE_CARD',
   card
 });
+
+export const createList = list => ({
+  type: 'CREATE_LIST',
+  list
+});
