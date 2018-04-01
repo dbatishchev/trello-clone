@@ -3,9 +3,19 @@ import './Dashboard.scss';
 
 export default class Dashboard extends Component {
 
+  pin = (e) => {
+    e.preventDefault();
+    this.props.pinDashboard();
+  };
+
+  unpin = (e) => {
+    e.preventDefault();
+    this.props.unpinDashboard();
+  };
+
   render() {
     return (
-      <div className="boards-drawer is-shown boards-drawer-pinned">
+      <div className={`boards-drawer ${this.props.isOpened ? 'is-shown' : ''} ${this.props.isPinned ? 'boards-drawer-pinned' : ''}`}>
         <div className="board-drawer-content u-fancy-scrollbar"><input className="js-search-boards" type="text" placeholder="Find boards by name…"/>
           <div className="js-board-drawer-boards">
             <div>
@@ -114,8 +124,15 @@ export default class Dashboard extends Component {
             </div>
           </div>
           <div className="js-board-drawer-buttons">
-            <div><a className="quiet-button js-add-board" href="#">Create new board…</a><a className="quiet-button js-pin" href="#">Always keep this menu open.</a><a
-              className="quiet-button hide js-unpin" href="#">Don’t keep this menu open.</a><a className="quiet-button js-open-closed-boards" href="#">See closed boards…</a></div>
+            <div>
+              <a className="quiet-button js-add-board" href="#">Create new board…</a>
+              {this.props.isPinned ? (
+                <a className="quiet-button hide js-unpin" href="#" onClick={this.unpin}>Don’t keep this menu open.</a>
+              ) : (
+                <a className="quiet-button js-pin" href="#" onClick={this.pin}>Always keep this menu open.</a>
+              )}
+              <a className="quiet-button js-open-closed-boards" href="#">See closed boards…</a>
+            </div>
           </div>
         </div>
       </div>

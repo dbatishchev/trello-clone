@@ -30,6 +30,7 @@ const getSelectedBoard = (boardsState) => {
 
 const mapStateToProps = state => ({
   selectedBoard: getSelectedBoard(state.boards),
+  isDashboardPinned: state.dashboard.isPinned,
 });
 
 const mapDispatchToProps = dispatch => ({

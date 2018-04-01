@@ -10,8 +10,11 @@
   width: 280px;
   top: 45px;
   z-index: 60;
-  display: block;
   font-size: 14px;
+}
+
+.boards-drawer.is-shown {
+  display: block;
 }
 
 .board-drawer-content {

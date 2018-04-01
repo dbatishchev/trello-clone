@@ -1,3 +1,19 @@
+export const openDashboard = card => ({
+  type: 'OPEN_DASHBOARD',
+});
+
+export const closeDashboard = card => ({
+  type: 'CLOSE_DASHBOARD',
+});
+
+export const pinDashboard = card => ({
+  type: 'PIN_DASHBOARD',
+});
+
+export const unpinDashboard = card => ({
+  type: 'UNPIN_DASHBOARD',
+});
+
 export const openCardModal = card => ({
   type: 'OPEN_CARD_MODAL',
   card
