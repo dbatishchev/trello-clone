@@ -6,6 +6,7 @@ import DroppableColumn from '../Column/DroppableColumn/DroppableColumn';
 import DraggableCard from '../Card/DraggableCard/DraggableCard';
 import AddList from '../AddList/AddList';
 import './Board.scss';
+import CardContainer from "../../containers/CardContainer";
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -16,7 +17,7 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-class Board extends Component {
+export default class Board extends Component {
 
   static propTypes = {
     board: PropTypes.object.isRequired,
@@ -66,7 +67,7 @@ class Board extends Component {
             return (
               <DroppableColumn id={col.id} title={col.title} key={col.id}>
                 {col.tasks.map((item, index) => (
-                  <DraggableCard item={item} index={index} key={item.id}>{item.content}</DraggableCard>
+                  <CardContainer card={item} index={index} key={item.id} />
                 ))}
               </DroppableColumn>
             );
@@ -77,5 +78,3 @@ class Board extends Component {
     );
   }
 }
-
-export default Board;

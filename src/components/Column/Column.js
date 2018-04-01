@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import AddCard from '../../components/AddCard/AddCard';
-import CardModal from '../../components/CardModal/CardModal';
 
 class Column extends Component {
   render() {

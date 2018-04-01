@@ -12,6 +12,7 @@ const store = createStore(rootReducer, {
   boards: {
     boardList: boardsInitialData,
     activeBoard: boardsInitialData[0],
+    isCardModalOpened: false,
   }
 });
 

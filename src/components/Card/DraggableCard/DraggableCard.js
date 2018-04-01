@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Draggable} from 'react-beautiful-dnd';
-import Card from '../Card';
+import Card from "../Card";
 
 const getItemStyle = (isDragging, draggableStyle) => ({
   userSelect: 'none',
@@ -8,11 +8,10 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle,
 });
 
-
-class DraggableCard extends Component {
+export default class DraggableCard extends Component {
   render() {
     return (
-      <Draggable key={this.props.item.id} draggableId={this.props.item.id} index={this.props.index}>
+      <Draggable key={this.props.card.id} draggableId={this.props.card.id} index={this.props.index}>
         {(provided, snapshot) => (
           <div>
             <div
@@ -24,9 +23,7 @@ class DraggableCard extends Component {
                 provided.draggableProps.style
               )}
             >
-              <Card>
-                {this.props.children}
-              </Card>
+              <Card card={this.props.card} openCardModal={this.props.openCardModal} />
             </div>
             {provided.placeholder}
           </div>
@@ -35,5 +32,3 @@ class DraggableCard extends Component {
     );
   }
 }
-
-export default DraggableCard;

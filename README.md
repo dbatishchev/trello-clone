@@ -20,3 +20,4 @@ pta-> is usefull, I have to find out if IDEA has same
 - [ ] bindActionCreators
 - [ ] https://github.com/reactjs/redux/issues/1222
 - [ ] https://redux.js.org/recipes/computing-derived-data
+- [ ] DraggableCard as HOC
