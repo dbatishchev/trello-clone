@@ -1,29 +1,26 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types';
-import { Button, Header, Icon, Modal } from 'semantic-ui-react'
+import { Modal } from 'semantic-ui-react'
 
 export default class CardModal extends Component {
 
   static propTypes = {
-    // card: PropTypes.object.isRequired,
+    card: PropTypes.object,
   };
 
   render() {
-    console.log(this.props);
+    if (!this.props.card) {
+      return null;
+    }
+
     return (
       <Modal open={this.props.isOpened} onClose={this.props.onClose}>
-        <Modal.Header>Profile Picture</Modal.Header>
-        <Modal.Content image>
+        <Modal.Header>{this.props.card.title}</Modal.Header>
+        <Modal.Content>
           <Modal.Description>
-            <Header>Modal Header</Header>
-            <p>This is an example of expanded content that will cause the modal's dimmer to scroll</p>
+            <p>{this.props.card.content}</p>
           </Modal.Description>
         </Modal.Content>
-        <Modal.Actions>
-          <Button primary>
-            Proceed <Icon name='right chevron' />
-          </Button>
-        </Modal.Actions>
       </Modal>
     );
   }

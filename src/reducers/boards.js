@@ -14,7 +14,7 @@ const boards = (state = [], action) => {
     case 'OPEN_CARD_MODAL':
       return {
         ...state,
-        activeCard: action.card,
+        selectedCardId: action.card.id,
         isCardModalOpened: true,
       };
     case 'CLOSE_CARD_MODAL':

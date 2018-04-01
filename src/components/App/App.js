@@ -4,7 +4,6 @@ import BoardListButton from '../../components/BoardListButton/BoardListButton';
 import BoardPanel from '../../components/BoardPanel/BoardPanel';
 import BoardContainer from "../../containers/BoardContainer";
 import CardModalContainer from "../../containers/CardModalContainer";
-import 'semantic-ui-css/semantic.min.css';
 import './App.scss';
 
 class App extends Component {

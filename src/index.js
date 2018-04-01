@@ -35,12 +35,12 @@ const store = createStore(rootReducer, {
       }
     },
     cardsById: {
-      1: {content: '111'},
-      2: {content: '222'},
-      3: {content: '333'},
-      4: {content: '444'},
-      5: {content: '555'},
-      6: {content: '666'},
+      1: {title: '1', content: '111'},
+      2: {title: '2', content: '222'},
+      3: {title: '3', content: '333'},
+      4: {title: '4', content: '444'},
+      5: {title: '5', content: '555'},
+      6: {title: '6', content: '666'},
     },
     selectedBoardId: 1,
     selectedCardId: 0,
