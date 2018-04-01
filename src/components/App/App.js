@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import BoardListButton from '../../components/BoardListButton/BoardListButton';
-import BoardPanel from '../../components/BoardPanel/BoardPanel';
+import BoardPanel from '../Dashboard/Dashboard';
 import BoardContainer from "../../containers/BoardContainer";
 import CardModalContainer from "../../containers/CardModalContainer";
 import './App.scss';
@@ -9,7 +9,7 @@ import './App.scss';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="app app--pinned">
         <div className="app-root">
           <nav className="navbar app">
             <BoardListButton />

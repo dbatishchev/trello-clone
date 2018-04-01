@@ -180,3 +180,14 @@
   font-weight: 400;
   line-height: 12px;
 }
+
+
+
+
+
+.boards-drawer-pinned {
+  border-radius: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+}
