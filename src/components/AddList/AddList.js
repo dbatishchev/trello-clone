@@ -27,12 +27,22 @@ class AddList extends Component {
     });
   };
 
-  onSaveClick = (e) => {
+  onSubmit = (e) => {
     e.preventDefault();
+    if (!this.input.value.trim()) {
+      return
+    }
+
     this.props.onCreate({
       id: 'ololo',
-      title: 'Created',
+      title: this.input.value,
       tasks: [],
+    });
+
+    this.input.value = '';
+
+    this.setState({
+      opened: false,
     });
   };
 
@@ -40,7 +50,7 @@ class AddList extends Component {
     return (
       <div className="list-wrapper">
         <div className={`add-list ${this.state.opened === true ? 'add-list--opened' : 'add-list--closed'}`}>
-          <form>
+          <form onSubmit={this.onSubmit}>
             <span className="placeholder" onClick={this.toggle}>Add a list…</span>
             <input
               className="list-name-input"
@@ -53,7 +63,7 @@ class AddList extends Component {
               ref={this.setInputRef}
             />
             <div className="list-add-controls u-clearfix">
-              <Button primary onClick={this.onSaveClick}>Save</Button>
+              <Button primary>Save</Button>
               <Icon name='times' onClick={this.toggle} />
             </div>
           </form>
