@@ -1,0 +1,40 @@
+.list-header {
+  flex: 0 0 auto;
+  padding: 8px 0;
+  position: relative;
+  min-height: 18px;
+}
+
+.list-header-target {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.list-header textarea {
+  -webkit-transition: background 85ms ease-in,border-color 85ms ease-in;
+  transition: background 85ms ease-in,border-color 85ms ease-in;
+  width: 100%;
+
+  background: transparent;
+  border-radius: 3px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-weight: 700;
+  margin: -3px -5px;
+  min-height: 18px;
+  padding: 3px 5px;
+  resize: none;
+  max-height: 256px;
+
+  border: 1px solid transparent;
+
+  line-height: 1.2em;
+
+  overflow: hidden;
+  word-wrap: break-word;
+  height: 24px;
+}
