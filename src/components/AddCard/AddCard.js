@@ -21,17 +21,22 @@ class AddCard extends Component {
 
   render() {
     return (
-      <div>
-        <div className={`list-card js-composer ${this.state.opened ? 'list-card--opened' : ''}`}>
-          <div className="list-card-details">
-            <textarea className="list-card-composer-textarea" />
+      <div className={`add-card ${this.state.opened ? 'add-card--opened' : ''}`}>
+        { this.state.opened ? (
+          <div>
+            <div className="list-card js-composer">
+              <div className="list-card-details">
+                <textarea className="add-card__textarea" />
+              </div>
+            </div>
+            <div className="list-card-details">
+              <Button primary>Save</Button>
+              <Icon name='times' onClick={this.toggle} />
+            </div>
           </div>
-        </div>
-        <div className={`list-card-details ${this.state.opened ? 'list-card--opened' : ''}`}>
-          <Button primary>Save</Button>
-          <Icon name='times' onClick={this.toggle} />
-        </div>
-        <div className={`open-card-composer ${this.state.opened ? 'open-card-composer--closed' : ''}`} onClick={this.toggle}>Add a card…</div>
+        ) : (
+          <div className="open-card-composer" onClick={this.toggle}>Add a card…</div>
+        )}
       </div>
     );
   }
