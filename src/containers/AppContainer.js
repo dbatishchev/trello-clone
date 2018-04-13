@@ -12,16 +12,16 @@ const getSelectedBoard = (boardsState) => {
 
   selectedBoard = {
     ...selectedBoard,
-    columns: map(selectedBoard.columns, cl => {
-      const column = {...boardsState.columnsById[cl]};
-      column.cards = map(column.cards, cd => {
+    lists: map(selectedBoard.lists, l => {
+      const list = {...boardsState.listsById[l], id: l};
+      list.cards = map(list.cards, cd => {
         return {
           id: cd,
           ...boardsState.cardsById[cd],
         };
       });
 
-      return column;
+      return list;
     }),
   };
 

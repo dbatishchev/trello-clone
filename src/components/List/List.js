@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ListHeader from '../../components/ListHeader/ListHeader';
 import AddCard from '../../components/AddCard/AddCard';
 
-class Column extends Component {
+class List extends Component {
   render() {
     return (
       <div className="list-wrapper list-wrapper--gray">
@@ -20,4 +20,4 @@ class Column extends Component {
   }
 }
 
-export default Column;
+export default List;

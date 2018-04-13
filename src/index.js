@@ -18,20 +18,20 @@ const store = createStore(rootReducer, {
     boardsDetailsById: {
       1: {
         description: 'test description',
-        columns: [1, 2]
+        lists: [1, 2]
       },
       2: {},
       3: {},
       4: {},
     },
-    columnsById: {
+    listsById: {
       1: {
-        title: 'Second Column',
+        title: 'Second List',
         cards: [1, 2, 3],
       },
       2: {
-        title: 'Second Column',
-        cards: [3, 4, 5],
+        title: 'Second List',
+        cards: [4, 5, 6],
       }
     },
     cardsById: {

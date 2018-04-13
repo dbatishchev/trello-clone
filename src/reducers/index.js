@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import columns from './columns'
+import lists from './lists'
 import boards from './boards'
 import dashboard from "./dashboard";
 
 export default combineReducers({
   boards,
-  columns,
+  lists,
   dashboard,
 });

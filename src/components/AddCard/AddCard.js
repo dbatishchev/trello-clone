@@ -26,7 +26,7 @@ class AddCard extends Component {
           <div>
             <div className="list-card js-composer">
               <div className="list-card-details">
-                <textarea className="add-card__textarea" />
+                <textarea className="add-card__textarea" defaultValue="" />
               </div>
             </div>
             <div className="list-card-details">

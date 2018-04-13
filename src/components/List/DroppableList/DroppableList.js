@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Droppable} from 'react-beautiful-dnd';
-import Column from '../Column';
+import List from '../List';
 
 const getListStyle = isDraggingOver => ({
   background: isDraggingOver ? 'lightblue' : 'lightgrey',
 });
 
-class DroppableColumn extends Component {
+class DroppableList extends Component {
   render() {
     return (
       <Droppable droppableId={this.props.id}>
@@ -16,10 +16,10 @@ class DroppableColumn extends Component {
               ref={provided.innerRef}
               // style={getListStyle(snapshot.isDraggingOver)}
             >
-              <Column title={this.props.title}>
+              <List title={this.props.title}>
                 {this.props.children}
                 {provided.placeholder}
-              </Column>
+              </List>
             </div>
           </div>
         )}
@@ -28,4 +28,4 @@ class DroppableColumn extends Component {
   }
 }
 
-export default DroppableColumn;
+export default DroppableList;

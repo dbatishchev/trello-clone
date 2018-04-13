@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {DragDropContext} from 'react-beautiful-dnd';
-import findIndex from 'lodash/findIndex';
-import DroppableColumn from '../Column/DroppableColumn/DroppableColumn';
-import DraggableCard from '../Card/DraggableCard/DraggableCard';
-import './Board.scss';
+import map from 'lodash/map';
+import DroppableList from '../List/DroppableList/DroppableList';
 import CardContainer from "../../containers/CardContainer";
 import AddListContainer from "../../containers/AddListContainer";
+import './Board.scss';
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -23,53 +22,64 @@ export default class Board extends Component {
     board: PropTypes.object.isRequired,
   };
 
-  // onDragEnd = (result) => {
-  //   if (!result.destination) {
-  //     return;
-  //   }
-  //
-  //   if (result.destination.droppableId === result.source.droppableId) {
-  //     const columnId = Number(result.destination.droppableId);
-  //     const columnIndex = findIndex(db, c => c.id === columnId);
-  //
-  //     db[columnIndex] = reorder(
-  //       this.state.items[columnIndex],
-  //       result.source.index,
-  //       result.destination.index
-  //     );
-  //   } else {
-  //     const sourceColumnId = Number(result.source.droppableId);
-  //     const destinationColumnId = Number(result.destination.droppableId);
-  //     const sourceColumnIndex = findIndex(db, c => c.id === sourceColumnId);
-  //     const destinationColumnIndex = findIndex(db, c => c.id === destinationColumnId);
-  //
-  //     const sourceColumnTasks = Array.from(this.state.items[sourceColumnIndex].tasks);
-  //     const movedElement = sourceColumnTasks[result.source.index];
-  //     sourceColumnTasks.splice(result.source.index, 1);
-  //
-  //     const destinationColumnTasks = Array.from(this.state.items[destinationColumnIndex].tasks);
-  //     destinationColumnTasks.splice(result.destination.index, 0, movedElement);
-  //
-  //     db[sourceColumnIndex].tasks = sourceColumnTasks;
-  //     db[destinationColumnIndex].tasks = destinationColumnTasks;
-  //   }
-  //
-  //   this.setState({
-  //     items: db,
-  //   });
-  // };
+  onDragEnd = (result) => {
+    const cardId = result.draggableId;
+    const sourceListId = result.source.droppableId;
+    const sourceIndex = result.source.index;
+    const destinationListId = result.destination.droppableId;
+    const destinationIndex = result.destination.index;
+
+    this.props.onMoveCard(cardId, sourceListId, destinationListId, sourceIndex, destinationIndex);
+
+    // const sourceListId = result.source.droppableId
+
+    // this.props.onMoveCard()
+
+    // if (!result.destination) {
+    //   return;
+    // }
+    //
+    // if (result.destination.droppableId === result.source.droppableId) {
+    //   const listId = Number(result.destination.droppableId);
+    //   const listIndex = findIndex(db, c => c.id === listId);
+    //
+    //   db[listIndex] = reorder(
+    //     this.state.items[listIndex],
+    //     result.source.index,
+    //     result.destination.index
+    //   );
+    // } else {
+    //   const sourceListId = Number(result.source.droppableId);
+    //   const destinationListId = Number(result.destination.droppableId);
+    //   const sourceListIndex = findIndex(db, c => c.id === sourceListId);
+    //   const destinationListIndex = findIndex(db, c => c.id === destinationListId);
+    //
+    //   const sourceListTasks = Array.from(this.state.items[sourceListIndex].tasks);
+    //   const movedElement = sourceListTasks[result.source.index];
+    //   sourceListTasks.splice(result.source.index, 1);
+    //
+    //   const destinationListTasks = Array.from(this.state.items[destinationListIndex].tasks);
+    //   destinationListTasks.splice(result.destination.index, 0, movedElement);
+    //
+    //   db[sourceListIndex].tasks = sourceListTasks;
+    //   db[destinationListIndex].tasks = destinationListTasks;
+    // }
+    //
+    // this.setState({
+    //   items: db,
+    // });
+  };
 
   render() {
+    const {lists} = this.props.board;
     return (
       <div className="lists">
         <DragDropContext onDragEnd={this.onDragEnd}>
-          {this.props.board.columns && this.props.board.columns.map((col) => {
+          {map(lists, (l) => {
             return (
-              <DroppableColumn id={col.id} title={col.title} key={col.id}>
-                {col.cards && col.cards.map((item, index) => (
-                  <CardContainer card={item} index={index} key={item.id} />
-                ))}
-              </DroppableColumn>
+              <DroppableList title={l.title} id={l.id} key={l.id}>
+                {map(l.cards, c => <CardContainer card={c} index={c.id} key={c.id}/>)}
+              </DroppableList>
             );
           })}
         </DragDropContext>
