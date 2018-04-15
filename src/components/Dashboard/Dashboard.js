@@ -28,7 +28,7 @@ export default class Dashboard extends Component {
                   <div className="js-section-content">
                     <ul className="sidebar-boards-list js-board-list">
                       {map(this.props.boards, board => (
-                        <li className="compact-board-tile">
+                        <li className="compact-board-tile" key={board.id}>
                           <div className="compact-board-tile-wrapper">
                             <span className="compact-board-tile-background" />
                             <span className="compact-board-tile-fade" />

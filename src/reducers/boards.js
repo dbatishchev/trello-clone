@@ -39,13 +39,18 @@ const boards = (state = [], action) => {
 
       if (destinationListId === sourceListId) {
         const list = state.listsById[sourceListId];
-        let cards = Array.from(list.cards);
-        const [removed] = cards.splice(sourceIndex, 1);
-        cards.splice(destinationIndex, 0, removed);
+        let cards = list.cards.filter(c => c !== cardId);
+        cards.splice(destinationIndex, 0, cardId);
 
-        console.log('zzzzzz', cards);
+        console.log(cards);
 
-        state.listsById[sourceListId] = {...list, cards}
+        return {
+          ...state,
+          listsById: {
+            ...state.listsById,
+            [sourceListId]: {...list, cards}
+          }
+        };
       } else {
 
       }

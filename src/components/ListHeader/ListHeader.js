@@ -9,7 +9,8 @@ export default class ListHeader extends Component {
           className="list-header-name mod-list-name js-list-name-input"
           aria-label="Приостановлены" spellCheck="false" dir="auto"
           maxLength="512"
-          >Приостановлены</textarea>
+          defaultValue={'Приостановлены'}
+        />
       </div>
     );
   }
