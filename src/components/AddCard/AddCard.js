@@ -12,6 +12,10 @@ class AddCard extends Component {
     }
   }
 
+  setTextAreaRef = (textarea) => {
+    this.textarea = textarea;
+  };
+
   toggle = () => {
     const isOpened = !this.state.opened;
     this.setState({
@@ -19,19 +23,41 @@ class AddCard extends Component {
     });
   };
 
+  onClick = (e) => {
+    e.preventDefault();
+    if (!this.textarea.value.trim()) {
+      return
+    }
+
+    this.props.onCreate({
+      id: '112123123123',
+      title: this.textarea.value,
+    }, this.props.list);
+
+    this.textarea.value = '';
+
+    this.setState({
+      opened: false,
+    });
+  };
+
   render() {
     return (
       <div className={`add-card ${this.state.opened ? 'add-card--opened' : ''}`}>
-        { this.state.opened ? (
+        {this.state.opened ? (
           <div>
-            <div className="list-card js-composer">
+            <div className="list-card">
               <div className="list-card-details">
-                <textarea className="add-card__textarea" defaultValue="" />
+                <textarea
+                  className="add-card__textarea"
+                  defaultValue=""
+                  ref={this.setTextAreaRef}
+                />
               </div>
             </div>
             <div className="list-card-details">
-              <Button primary>Save</Button>
-              <Icon name='times' onClick={this.toggle} />
+              <Button primary onClick={this.onClick}>Save</Button>
+              <Icon name='times' onClick={this.toggle}/>
             </div>
           </div>
         ) : (

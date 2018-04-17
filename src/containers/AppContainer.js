@@ -18,6 +18,7 @@ const getSelectedBoard = (state) => {
       const list = {...boardsState.listsById[l], id: l};
       list.cards = map(list.cards, cd => {
         const card = boardsState.cardsById[cd];
+
         return {
           ...card,
           assignees: map(card.assignees, a => boardsState.users[a]),

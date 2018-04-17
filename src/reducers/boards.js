@@ -1,4 +1,4 @@
-import {MOVE_CARD, CLOSE_CARD_MODAL, CREATE_LIST, UPDATE_LIST, OPEN_CARD_MODAL} from '../actions';
+import {CREATE_CARD, MOVE_CARD, CLOSE_CARD_MODAL, CREATE_LIST, UPDATE_LIST, OPEN_CARD_MODAL} from '../actions';
 
 // https://github.com/reactjs/redux/blob/master/docs/recipes/reducers/ImmutableUpdatePatterns.md
 
@@ -19,10 +19,10 @@ const boards = (state = [], action) => {
     case CREATE_LIST:
       const listId = action.list.id;
       const selectedBoardDetails = state.boardsDetailsById[state.selectedBoardId];
-      selectedBoardDetails.lists = [
+      selectedBoardDetails.lists = {
         ...selectedBoardDetails.lists,
         listId,
-      ];
+      };
 
       return {
         ...state,
@@ -48,6 +48,24 @@ const boards = (state = [], action) => {
           },
         },
       };
+    case CREATE_CARD:
+      const card = action.card;
+
+      return {
+        ...state,
+        listsById: {
+          ...state.listsById,
+          [action.list.id]: {
+            ...state.listsById[action.list.id],
+            cards: [...state.listsById[action.list.id].cards, card.id],
+          }
+        },
+        cardsById: {
+          ...state.cardsById,
+          [card.id]: card,
+        }
+      };
+
     case MOVE_CARD:
       const {cardId, sourceListId, destinationListId, sourceIndex, destinationIndex} = action;
 
@@ -55,8 +73,6 @@ const boards = (state = [], action) => {
         const list = state.listsById[sourceListId];
         let cards = list.cards.filter(c => c !== cardId);
         cards.splice(destinationIndex, 0, cardId);
-
-        console.log(cards);
 
         return {
           ...state,

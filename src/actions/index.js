@@ -4,6 +4,7 @@ export const PIN_DASHBOARD = 'PIN_DASHBOARD';
 export const UNPIN_DASHBOARD = 'UNPIN_DASHBOARD';
 export const OPEN_CARD_MODAL = 'OPEN_CARD_MODAL';
 export const CLOSE_CARD_MODAL = 'CLOSE_CARD_MODAL';
+export const CREATE_CARD = 'CREATE_CARD';
 export const MOVE_CARD = 'MOVE_CARD';
 export const CREATE_LIST = 'CREATE_LIST';
 export const UPDATE_LIST = 'UPDATE_LIST';
@@ -32,6 +33,12 @@ export const openCardModal = card => ({
 export const closeCardModal = card => ({
   type: CLOSE_CARD_MODAL,
   card
+});
+
+export const createCard = (card, list) => ({
+  type: CREATE_CARD,
+  card,
+  list,
 });
 
 export const moveCard = (cardId, sourceListId, destinationListId, sourceIndex, destinationIndex) => ({

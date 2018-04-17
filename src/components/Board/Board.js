@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
+import AddCardContainer from '../../containers/AddCardContainer';
 import ListHeaderContainer from '../../containers/ListHeaderContainer';
-import AddCard from '../AddCard/AddCard';
 import CardContainer from "../../containers/CardContainer";
 import AddListContainer from "../../containers/AddListContainer";
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
@@ -70,7 +70,7 @@ export default class Board extends Component {
                   </Droppable>
                 </div>
                 <footer>
-                  <AddCard />
+                  <AddCardContainer list={l} />
                 </footer>
               </div>
               </div>
