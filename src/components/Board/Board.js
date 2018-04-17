@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {DragDropContext} from 'react-beautiful-dnd';
 import map from 'lodash/map';
-import DroppableList from '../List/DroppableList/DroppableList';
+import AddCard from '../AddCard/AddCard';
+import ListHeader from '../ListHeader/ListHeader';
 import CardContainer from "../../containers/CardContainer";
 import AddListContainer from "../../containers/AddListContainer";
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import './Board.scss';
+
+const getItemStyle = (isDragging, draggableStyle) => ({
+  // some basic styles to make the items look a bit nicer
+  margin: `0 0 10px 0`,
+  ...draggableStyle,
+});
 
 export default class Board extends Component {
 
@@ -31,9 +38,40 @@ export default class Board extends Component {
         <DragDropContext onDragEnd={this.onDragEnd}>
           {map(lists, (l) => {
             return (
-              <DroppableList title={l.title} id={`${l.id}`} key={`${l.id}`}>
-                {map(l.cards, c => <CardContainer card={c} index={`${c.id}`} key={`${c.id}`}/>)}
-              </DroppableList>
+              <div className="list-wrapper list-wrapper--gray">
+                <div className="list">
+                  <ListHeader />
+                  <Droppable droppableId={l.id} key={l.id}>
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                      >
+                        {map(l.cards, (c, index) => (
+                          <Draggable key={c.id} draggableId={c.id} index={index}>
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={getItemStyle(
+                                  snapshot.isDragging,
+                                  provided.draggableProps.style
+                                )}
+                              >
+                                <CardContainer card={c}/>
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                </div>
+                <footer>
+                  <AddCard />
+                </footer>
+              </div>
             );
           })}
         </DragDropContext>

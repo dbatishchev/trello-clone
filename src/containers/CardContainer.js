@@ -1,5 +1,5 @@
-import DraggableCard from "../components/Card/DraggableCard/DraggableCard";
 import {connect} from 'react-redux'
+import Card from '../components/Card/Card';
 import {openCardModal} from "../actions";
 
 const mapStateToProps = state => ({
@@ -15,4 +15,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DraggableCard);
+)(Card);
