@@ -43,7 +43,6 @@ body {
 .lists {
   display: flex;
   overflow-x: auto;
-  //width: 100%; // This is needed for FF < 54
   > * {
     flex: 0 0 auto; // 'rigid' lists
     margin-left: $gap;
@@ -56,7 +55,6 @@ body {
 
 .list-wrapper {
   width: $list-width;
-  height: calc(100% - #{$gap} - #{$scrollbar-thickness});
   border-radius: 3px;
 
   &--gray {

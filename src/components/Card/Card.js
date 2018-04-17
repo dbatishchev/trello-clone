@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import map from 'lodash/map';
 import './Card.scss';
 
 export default class Card extends Component {
@@ -14,9 +15,31 @@ export default class Card extends Component {
   };
 
   render() {
+    const {card} = this.props;
     return (
       <div className="card" onClick={this.openModal}>
-        {this.props.card.content}
+        {card.image && (
+          <div className="card__image">
+            <img src={card.image} />
+          </div>
+        )}
+        {card.tags && card.tags.length > 0 && (
+          <div className="card__tag-block">
+            {map(card.tags, (t) => (
+              <div className={`card__tag card__tag--${t.color}`} key={t.id} />
+            ))}
+          </div>
+        )}
+        {card.title}
+        {card.assignees && card.assignees.length > 0 && (
+          <div className="card__assignees-block">
+            {map(card.assignees, (a) => (
+              <div className="card__assignee" key={a.id}>
+                <img src={a.avatar} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     );
   }

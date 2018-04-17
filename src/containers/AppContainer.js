@@ -4,7 +4,9 @@ import map from 'lodash/map'
 import * as BoardActions from '../actions'
 import App from "../components/App/App";
 
-const getSelectedBoard = (boardsState) => {
+const getSelectedBoard = (state) => {
+  const boardsState = state.boards;
+
   let selectedBoard = {
     ...boardsState.boardsById[boardsState.selectedBoardId],
     ...boardsState.boardsDetailsById[boardsState.selectedBoardId],
@@ -15,9 +17,11 @@ const getSelectedBoard = (boardsState) => {
     lists: map(selectedBoard.lists, l => {
       const list = {...boardsState.listsById[l], id: l};
       list.cards = map(list.cards, cd => {
+        const card = boardsState.cardsById[cd];
         return {
-          id: cd,
-          ...boardsState.cardsById[cd],
+          ...card,
+          assignees: map(card.assignees, a => boardsState.users[a]),
+          tags: map(card.tags, a => boardsState.tags[a]),
         };
       });
 
@@ -29,7 +33,7 @@ const getSelectedBoard = (boardsState) => {
 };
 
 const mapStateToProps = state => ({
-  selectedBoard: getSelectedBoard(state.boards),
+  selectedBoard: getSelectedBoard(state),
   isDashboardPinned: state.dashboard.isPinned,
 });
 

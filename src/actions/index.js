@@ -6,6 +6,7 @@ export const OPEN_CARD_MODAL = 'OPEN_CARD_MODAL';
 export const CLOSE_CARD_MODAL = 'CLOSE_CARD_MODAL';
 export const MOVE_CARD = 'MOVE_CARD';
 export const CREATE_LIST = 'CREATE_LIST';
+export const UPDATE_LIST = 'UPDATE_LIST';
 
 export const openDashboard = card => ({
   type: OPEN_DASHBOARD,
@@ -44,4 +45,10 @@ export const moveCard = (cardId, sourceListId, destinationListId, sourceIndex, d
 export const createList = list => ({
   type: CREATE_LIST,
   list
+});
+
+export const updateList = (list, data) => ({
+  type: UPDATE_LIST,
+  list,
+  data
 });

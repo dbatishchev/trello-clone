@@ -1,4 +1,4 @@
-import {MOVE_CARD, CLOSE_CARD_MODAL, CREATE_LIST, OPEN_CARD_MODAL} from '../actions';
+import {MOVE_CARD, CLOSE_CARD_MODAL, CREATE_LIST, UPDATE_LIST, OPEN_CARD_MODAL} from '../actions';
 
 // https://github.com/reactjs/redux/blob/master/docs/recipes/reducers/ImmutableUpdatePatterns.md
 
@@ -23,6 +23,7 @@ const boards = (state = [], action) => {
         ...selectedBoardDetails.lists,
         listId,
       ];
+
       return {
         ...state,
         boardsDetailsById: {
@@ -32,6 +33,19 @@ const boards = (state = [], action) => {
         listsById: {
           ...state.listsById,
           [listId]: action.list,
+        },
+      };
+    case UPDATE_LIST:
+      const {list, data} = action;
+
+      return {
+        ...state,
+        listsById: {
+          ...state.listsById,
+          [list.id]: {
+            ...state.listsById[list.id],
+            ...data
+          },
         },
       };
     case MOVE_CARD:

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
+import ListHeaderContainer from '../../containers/ListHeaderContainer';
 import AddCard from '../AddCard/AddCard';
-import ListHeader from '../ListHeader/ListHeader';
 import CardContainer from "../../containers/CardContainer";
 import AddListContainer from "../../containers/AddListContainer";
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
@@ -38,9 +38,10 @@ export default class Board extends Component {
         <DragDropContext onDragEnd={this.onDragEnd}>
           {map(lists, (l) => {
             return (
+              <div>
               <div className="list-wrapper list-wrapper--gray">
                 <div className="list">
-                  <ListHeader />
+                  <ListHeaderContainer list={l} />
                   <Droppable droppableId={l.id} key={l.id}>
                     {(provided, snapshot) => (
                       <div
@@ -72,11 +73,12 @@ export default class Board extends Component {
                   <AddCard />
                 </footer>
               </div>
+              </div>
             );
           })}
         </DragDropContext>
         <AddListContainer/>
-      </div>
+        </div>
     );
   }
 }

@@ -10,11 +10,55 @@ $card-border-radius: 3px;
   border-radius: $card-border-radius;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 
-  img {
-    display: block;
-    width: calc(100% + 2 * #{$gap});
-    margin: -$gap 0 $gap (-$gap);
-    border-top-left-radius: $card-border-radius;
-    border-top-right-radius: $card-border-radius;
+  &__image {
+    img {
+      display: block;
+      width: calc(100% + 2 * #{$gap});
+      margin: -$gap 0 $gap (-$gap);
+      border-top-left-radius: $card-border-radius;
+      border-top-right-radius: $card-border-radius;
+    }
+  }
+
+  &__assignees-block {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__assignee {
+    margin-top: 10px;
+
+    img {
+      width: 40px;
+      height: 40px;
+      margin-right: 8px;
+      flex-shrink: 0;
+      flex-grow: 0;
+      border-radius: 50%;
+    }
+  }
+
+  &__tag-block {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__tag {
+    height: 8px;
+    margin: 0 3px 3px 0;
+    max-width: 42px;
+    min-width: 42px;
+    padding: 0;
+    text-shadow: none;
+    width: auto;
+    border-radius: 3px;
+
+    &--green {
+      background-color: #61bd4f;
+    }
+
+    &--red {
+      background-color: #eb5a46;
+    }
   }
 }

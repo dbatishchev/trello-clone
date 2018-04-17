@@ -37,12 +37,41 @@ const store = createStore(rootReducer, {
       }
     },
     cardsById: {
-      1: {id: 1, title: '1', content: '111'},
-      2: {id: 2, title: '2', content: '222'},
-      3: {id: 3, title: '3', content: '333'},
-      4: {id: 4, title: '4', content: '444'},
-      5: {id: 5, title: '5', content: '555'},
-      6: {id: 6, title: '6', content: '666'},
+      1: {
+        id: 1,
+        title: 'Lorem ipsum dolor',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla fringilla sodales nibh, ac dignissim sem malesuada a. Nullam porttitor tortor vel malesuada consectetur. Praesent tempus ornare ligula sed commodo. Ut quis luctus lacus. Vivamus pretium turpis quam, quis sagittis erat tempor et. Ut elementum nunc eget pellentesque accumsan.',
+        assignees: [1]
+      },
+      2: {
+        id: 2,
+        title: 'Class aptent',
+        content: 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum tincidunt efficitur aliquet. Aenean at hendrerit neque, non tempus sapien.',
+        image: 'https://picsum.photos/300/100',
+        assignees: [1, 2]
+      },
+      3: {
+        id: 3,
+        title: 'Mauris odio',
+        content: 'Mauris odio arcu, consequat ut lobortis in, venenatis et neque. Aliquam elit dolor, ullamcorper quis dignissim vel, rhoncus a elit. Vivamus lacinia aliquam diam, consequat venenatis lorem porttitor et. Ut ac neque iaculis orci finibus dictum vitae eu erat. Maecenas ac venenatis lorem, eu aliquam orci. Praesent quis leo eros. Aenean facilisis semper elit vitae suscipit. Mauris tincidunt vestibulum molestie. Proin lorem dolor, finibus vitae blandit nec, venenatis vel lacus. Mauris in finibus turpis.',
+        assignees: [1]
+      },
+      4: {id: 4, title: 'Sed at pellentesque', content: 'Sed at pellentesque nibh.', image: 'https://picsum.photos/400/200', assignees: [2], tags: [1, 2]},
+      5: {id: 5, title: 'Cras sed nulla vitae lorem', content: 'Cras sed nulla vitae lorem sagittis sodales eu sit amet lectus', assignees: [1], tags: [1]},
+      6: {
+        id: 6,
+        title: 'Mauris odio arcu',
+        content: 'Mauris odio arcu, consequat ut lobortis in, venenatis et neque. Aliquam elit dolor, ullamcorper quis dignissim vel, rhoncus a elit. Vivamus lacinia aliquam diam, consequat venenatis lorem porttitor et. Ut ac neque iaculis orci finibus dictum vitae eu erat. Maecenas ac venenatis lorem, eu aliquam orci.',
+        assignees: [1, 2]
+      },
+    },
+    users: {
+      1: {id: 1, username: 'First', avatar: 'https://68.media.tumblr.com/avatar_1f7bdbbeb59c_128.png'},
+      2: {id: 2, username: 'Second', avatar: 'https://68.media.tumblr.com/avatar_09404f3287c6_128.png'},
+    },
+    tags: {
+      1: {id: 1, title: 'Mauris odio arcu', color: 'green'},
+      2: {id: 2, title: 'Class aptent', color: 'red'},
     },
     selectedBoardId: 1,
     selectedCardId: 0,
