@@ -62,7 +62,8 @@ const store = createStore(rootReducer, {
         id: 6,
         title: 'Mauris odio arcu',
         content: 'Mauris odio arcu, consequat ut lobortis in, venenatis et neque. Aliquam elit dolor, ullamcorper quis dignissim vel, rhoncus a elit. Vivamus lacinia aliquam diam, consequat venenatis lorem porttitor et. Ut ac neque iaculis orci finibus dictum vitae eu erat. Maecenas ac venenatis lorem, eu aliquam orci.',
-        assignees: [1, 2]
+        assignees: [1, 2],
+        logs: [1, 2],
       },
     },
     users: {
@@ -72,6 +73,10 @@ const store = createStore(rootReducer, {
     tags: {
       1: {id: 1, title: 'Mauris odio arcu', color: 'green'},
       2: {id: 2, title: 'Class aptent', color: 'red'},
+    },
+    logs: {
+      1: {id: 1},
+      2: {id: 2},
     },
     selectedBoardId: 1,
     selectedCardId: 0,

@@ -22,3 +22,4 @@ pta-> is usefull, I have to find out if IDEA has same
 - [ ] https://redux.js.org/recipes/computing-derived-data
 - [ ] DraggableCard as HOC
 - [ ] Add dashboard toggling
+- [ ] https://github.com/ReactTraining/react-router/blob/25776d4dc89b8fb2f575884749766355992116b5/packages/react-router/docs/guides/migrating.md#the-router

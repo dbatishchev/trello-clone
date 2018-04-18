@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types';
 import { Modal } from 'semantic-ui-react'
+import CardDetails from '../CardDetails/CardDetails';
 
 export default class CardModal extends Component {
 
@@ -18,7 +19,7 @@ export default class CardModal extends Component {
         <Modal.Header>{this.props.card.title}</Modal.Header>
         <Modal.Content>
           <Modal.Description>
-            <p>{this.props.card.content}</p>
+            <CardDetails card={this.props.card} />
           </Modal.Description>
         </Modal.Content>
       </Modal>

@@ -22,7 +22,8 @@ const getSelectedBoard = (state) => {
         return {
           ...card,
           assignees: map(card.assignees, a => boardsState.users[a]),
-          tags: map(card.tags, a => boardsState.tags[a]),
+          tags: map(card.tags, t => boardsState.tags[t]),
+          logs: map(card.logs, l => boardsState.logs[l]),
         };
       });
 
