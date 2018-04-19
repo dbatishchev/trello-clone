@@ -38,47 +38,47 @@ export default class Board extends Component {
         <DragDropContext onDragEnd={this.onDragEnd}>
           {map(lists, (l) => {
             return (
-              <div>
-              <div className="list-wrapper list-wrapper--gray">
-                <div className="list">
-                  <ListHeaderContainer list={l} />
-                  <Droppable droppableId={l.id} key={l.id}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                      >
-                        {map(l.cards, (c, index) => (
-                          <Draggable key={c.id} draggableId={c.id} index={index}>
-                            {(provided, snapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                style={getItemStyle(
-                                  snapshot.isDragging,
-                                  provided.draggableProps.style
-                                )}
-                              >
-                                <CardContainer card={c}/>
-                              </div>
-                            )}
-                          </Draggable>
-                        ))}
-                        {provided.placeholder}
-                      </div>
-                    )}
-                  </Droppable>
+              <div key={l.id}>
+                <div className="list-wrapper list-wrapper--gray">
+                  <div className="list">
+                    <ListHeaderContainer list={l}/>
+                    <Droppable droppableId={l.id} key={l.id}>
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                        >
+                          {map(l.cards, (c, index) => (
+                            <Draggable key={c.id} draggableId={c.id} index={index}>
+                              {(provided, snapshot) => (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  style={getItemStyle(
+                                    snapshot.isDragging,
+                                    provided.draggableProps.style
+                                  )}
+                                >
+                                  <CardContainer card={c}/>
+                                </div>
+                              )}
+                            </Draggable>
+                          ))}
+                          {provided.placeholder}
+                        </div>
+                      )}
+                    </Droppable>
+                  </div>
+                  <footer>
+                    <AddCardContainer list={l}/>
+                  </footer>
                 </div>
-                <footer>
-                  <AddCardContainer list={l} />
-                </footer>
-              </div>
               </div>
             );
           })}
         </DragDropContext>
         <AddListContainer/>
-        </div>
+      </div>
     );
   }
 }
