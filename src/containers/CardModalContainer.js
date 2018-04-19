@@ -1,13 +1,10 @@
 import {connect} from 'react-redux'
+import {getSelectedCard} from '../reducers/boards';
 import CardModal from "../components/CardModal/CardModal";
 import {closeCardModal} from "../actions/index";
 
-const getSelectedCard = (cardsById, selectedCardId) => {
-  return cardsById[selectedCardId];
-};
-
 const mapStateToProps = state => ({
-    card: getSelectedCard(state.boards.cardsById, state.boards.selectedCardId),
+    card: getSelectedCard(state),
     isOpened: state.boards.isCardModalOpened,
 });
 

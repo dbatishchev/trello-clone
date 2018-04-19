@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Icon} from 'semantic-ui-react'
+import shortid from 'shortid';
 import './AddCard.scss';
 
 class AddCard extends Component {
@@ -30,7 +31,7 @@ class AddCard extends Component {
     }
 
     this.props.onCreate({
-      id: '112123123123',
+      id: shortid.generate(),
       title: this.textarea.value,
     }, this.props.list);
 

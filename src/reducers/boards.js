@@ -3,6 +3,35 @@ import {CREATE_CARD, MOVE_CARD, CLOSE_CARD_MODAL, CREATE_LIST, UPDATE_LIST, OPEN
 
 // https://github.com/reactjs/redux/blob/master/docs/recipes/reducers/ImmutableUpdatePatterns.md
 
+const getCardInfoById = (state, cardId) => {
+  const boardsState = state.boards;
+  const card = boardsState.cardsById[cardId];
+
+  if (!card) {
+    return null;
+  }
+
+  return {
+    ...card,
+    assignees: map(card.assignees, a => boardsState.users[a]),
+    tags: map(card.tags, t => boardsState.tags[t]),
+    logs: map(card.logs, l => {
+      return {
+        ...boardsState.logs[l],
+        author: boardsState.users[boardsState.logs[l].author],
+      }
+    }),
+  };
+};
+
+export const getSelectedCard = (state) => {
+  if (!state.boards.selectedCardId) {
+    return;
+  }
+
+  return getCardInfoById(state, state.boards.selectedCardId);
+};
+
 export const getSelectedBoard = (state) => {
   const boardsState = state.boards;
 
@@ -15,21 +44,7 @@ export const getSelectedBoard = (state) => {
     ...selectedBoard,
     lists: map(selectedBoard.lists, l => {
       const list = {...boardsState.listsById[l], id: l};
-      list.cards = map(list.cards, cd => {
-        const card = boardsState.cardsById[cd];
-
-        return {
-          ...card,
-          assignees: map(card.assignees, a => boardsState.users[a]),
-          tags: map(card.tags, t => boardsState.tags[t]),
-          logs: map(card.logs, l => {
-            return {
-              ...boardsState.logs[l],
-              author: boardsState.users[boardsState.logs[l].author],
-            }
-          }),
-        };
-      });
+      list.cards = map(list.cards, cId => getCardInfoById(state, cId));
 
       return list;
     }),
