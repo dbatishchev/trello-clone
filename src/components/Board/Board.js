@@ -27,7 +27,7 @@ export default class Board extends Component {
     const destinationListId = result.destination.droppableId;
     const destinationIndex = result.destination.index;
 
-    this.props.onMoveCard(Number(cardId), Number(sourceListId), Number(destinationListId), Number(sourceIndex), Number(destinationIndex));
+    this.props.onMoveCard(cardId, sourceListId, destinationListId, sourceIndex, destinationIndex);
   };
 
   render() {
