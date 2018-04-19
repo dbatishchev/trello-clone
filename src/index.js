@@ -1,11 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux'
-import {createStore} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 import rootReducer from './reducers'
 import './styles/main.scss';
 import registerServiceWorker from './registerServiceWorker';
 import AppContainer from "./containers/AppContainer";
+import createHistory from 'history/createBrowserHistory'
+import {ConnectedRouter, routerMiddleware} from 'react-router-redux'
+import { Route } from 'react-router'
+
+// Create a history of your choosing (we're using a browser history in this case)
+const history = createHistory();
+
+// Build the middleware for intercepting and dispatching navigation actions
+const middleware = routerMiddleware(history);
 
 const store = createStore(rootReducer, {
   boards: {
@@ -81,11 +90,14 @@ const store = createStore(rootReducer, {
     selectedBoardId: '1',
     selectedCardId: null,
     isCardModalOpened: false,
-  }
-});
+  },
+}, applyMiddleware(middleware));
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppContainer/>
+    <ConnectedRouter history={history}>
+      <Route exact path="/" component={AppContainer}/>
+      {/*<Route path="/about" component={About}/>*/}
+    </ConnectedRouter>
   </Provider>, document.getElementById('root'));
 registerServiceWorker();
