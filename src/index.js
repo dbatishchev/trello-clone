@@ -75,8 +75,8 @@ const store = createStore(rootReducer, {
       2: {id: 2, title: 'Class aptent', color: 'red'},
     },
     logs: {
-      1: {id: 1},
-      2: {id: 2},
+      1: {id: 1, author: 1},
+      2: {id: 2, author: 2},
     },
     selectedBoardId: 1,
     selectedCardId: 0,

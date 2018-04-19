@@ -1,6 +1,42 @@
+import map from 'lodash/map';
 import {CREATE_CARD, MOVE_CARD, CLOSE_CARD_MODAL, CREATE_LIST, UPDATE_LIST, OPEN_CARD_MODAL} from '../actions';
 
 // https://github.com/reactjs/redux/blob/master/docs/recipes/reducers/ImmutableUpdatePatterns.md
+
+export const getSelectedBoard = (state) => {
+  const boardsState = state.boards;
+
+  let selectedBoard = {
+    ...boardsState.boardsById[boardsState.selectedBoardId],
+    ...boardsState.boardsDetailsById[boardsState.selectedBoardId],
+  };
+
+  selectedBoard = {
+    ...selectedBoard,
+    lists: map(selectedBoard.lists, l => {
+      const list = {...boardsState.listsById[l], id: l};
+      list.cards = map(list.cards, cd => {
+        const card = boardsState.cardsById[cd];
+
+        return {
+          ...card,
+          assignees: map(card.assignees, a => boardsState.users[a]),
+          tags: map(card.tags, t => boardsState.tags[t]),
+          logs: map(card.logs, l => {
+            return {
+              ...boardsState.logs[l],
+              author: boardsState.users[boardsState.logs[l].author],
+            }
+          }),
+        };
+      });
+
+      return list;
+    }),
+  };
+
+  return selectedBoard;
+};
 
 const boards = (state = [], action) => {
   // https://hackernoon.com/redux-patterns-add-edit-remove-objects-in-an-array-6ee70cab2456

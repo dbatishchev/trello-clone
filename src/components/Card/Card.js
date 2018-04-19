@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
+import UserAvatar from '../../components/UserAvatar/UserAvatar';
 import './Card.scss';
 
 export default class Card extends Component {
@@ -34,8 +35,8 @@ export default class Card extends Component {
         {card.assignees && card.assignees.length > 0 && (
           <div className="card__assignees-block">
             {map(card.assignees, (a) => (
-              <div className="card__assignee" key={a.id}>
-                <img src={a.avatar} />
+              <div className='card__assignee' key={a.id}>
+                <UserAvatar user={a} />
               </div>
             ))}
           </div>
